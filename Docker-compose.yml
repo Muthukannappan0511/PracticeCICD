@@ -1,5 +1,3 @@
-version: "3.8"
- 
 services:
   mysql-db:
     image: mysql:8.0
@@ -20,10 +18,9 @@ services:
       retries: 15
     networks:
       - fullstack-net
- 
   backend:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     container_name: spring-backend
     depends_on:
@@ -37,19 +34,6 @@ services:
       - "8080:8080"
     networks:
       - fullstack-net
- 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: react-frontend
-    depends_on:
-      - backend
-    ports:
-      - "5173:80"
-    networks:
-      - fullstack-net
- 
 volumes:
   mysql_data:
  
